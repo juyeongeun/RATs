@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link rel="stylesheet" type="text/css" href="/css/join.css">
+</head>
+
+<body>
+    
+    <form method="post" id="login-form">
+        <!-- <h3 style="color:#fff787; text-align: center; ">
+            Auto Absenteeism Management
+          </h3> -->
+        <fieldset>
+            <img src="img/logo.png" style="width:160px; height: 90px; margin-left: 120px; margin-top:40px; margin-bottom:30px;">
+            <div class="info">
+                <img class="input-icon" src="/img/id.png" style="left:40px;">
+                <input type="text" id="username" name="username" placeholder="ID" onfocus="this.placeholder=''"
+                    onblur="this.placeholder='ID'">
+            </div>
+            <div class="info">
+                <img class="input-icon" src="/img/pw.png">
+                <input type="password" id="password" name="password" placeholder="Password"
+                    onfocus="this.placeholder=''" onblur="this.placeholder='Password'">
+            </div>
+            <div class="info">
+                <img class="input-icon" src="/img/pw.png">
+                <input type="password" id="repassword" name="repassword" placeholder="Confirm-Password"
+                    onfocus="this.placeholder=''" onblur="this.placeholder='Confirm-Password'">
+            </div>
+            <div align="center">
+                <button type="button" id="join-button">Create</button>
+            </div>
+        </fieldset>
+    </form>
+    <script>
+        //회원가입 버튼 눌렀을 때
+        document.getElementById("join-button").addEventListener("click", function () {
+            //클라이언트에서 입력한 값 가져와서 저장하기
+            const username = document.getElementsByName('username')[0].value;
+            const password = document.getElementsByName('password')[0].value;
+            const repassword = document.getElementsByName('repassword')[0].value;
+
+            // JSON 형식으로 데이터를 생성하여 전송
+            const data = { username: username, password: password, repassword: repassword };
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/insertjoin', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200 || xhr.status === 302) {
+                        // 로그인 성공시 홈페이지로 이동하는 코드 추가
+                        window.location.href = '/';
+                    } else if (xhr.status === 401) {
+                        alert(xhr.responseText);
+                    } else {
+                        alert("서버 오류가 발생했습니다.");
+                    }
+                }
+            };
+            xhr.send(JSON.stringify(data));
+        });
+    </script>
+</body>
+
+</html>

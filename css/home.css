@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #1f2029;
+    font-weight: 300;
+    font-size: 15px;
+    /* line-height: 1.5; */
+    color: #c4c3ca;
+    overflow-x: hidden;
+    text-align: center;
+}
+
+.topmargin {
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.page {
+    width: 100%;
+    text-align: center;
+    margin-left: 10px;
+}
+
+.header {
+    width: 750px;
+    margin-left: 10px;
+    margin-top:15px;
+    margin-bottom:15px;
+}
+
+.menu {
+    padding-left: 3px;
+    width: 180px;
+    float: left;
+    height: 750px;
+    border-right: 1px solid rgb(255, 255, 255);
+}
+
+.content {
+    width: 1300px;
+    margin-left: 200px;
+    min-height: 270px;
+    height: 300px;
+}
+
+.container {
+    width: 600px;
+    height: 270px;
+    overflow: auto;
+    text-align: cecnter;
+}
+
+.Mcontainer {
+    width: 800px;
+    height: 300px;
+    text-align: cecnter;
+    margin-left: 20px;
+}
+
+.container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.container::-webkit-scrollbar-thumb {
+    background-color: #ffeba7;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+
+.container::-webkit-scrollbar-track {
+    background-color: #313241;
+    border-radius: 10px;
+    /* box-shadow: inset 0px 0px 5px white; */
+}
+
+.footer {
+    padding: 10px;
+    width: 1300px;
+    margin: 10px 0 10px 201px;
+    min-height: 250px;
+    height: 285px
+}
+
+.packetstyle{
+    color:white;
+    margin-top:13px;
+    width : 550px;
+    text-align: left;
+    padding: 8px;
+    word-spacing: 45px;
+  }
+  
+  .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .row label {
+    margin-right: 10px;
+  }
+  
+  .date {
+    width: 210px;
+  }
+  
+  .mac {
+    width: 170px;
+    margin-left:35px;
+  }
+  
+  .status {
+    flex-grow: 1;
+  }
+
+input:focus {
+    outline-style: none;
+}
+
+input::placeholder {
+    color: #9c969b;
+}
+
+ul {
+    font-size: 14px;
+    list-style-type: none;
+    width: 160px;
+    padding: 3px;
+    line-height: 30px;
+}
+
+.scroll{
+    width:200px;
+    height:400px;
+    overflow: auto;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 10px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    background-color: #ffeba7;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+
+.scroll::-webkit-scrollbar-track {
+    background-color: #313241;
+    border-radius: 10px;
+    /* box-shadow: inset 0px 0px 5px white; */
+}
+
+button {
+    font-size: 15px;
+    padding: 3px 7px;
+    border: none;
+    background-color: #ffeba7;
+    border-radius: 5px;
+    color: #111b3a;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #ffe96c;
+    color: #111b3a;
+    box-shadow: 0 8px 24px 0 rgba(16, 39, 112, .2);
+}
+
+canvas {
+    padding: 5px;
+    background-color: #1f2029;
+}
+
+input[type="date"] {
+    position: relative;
+    width: 115px;
+    height: 30px;
+    border-radius: 12px;
+    border: 1px solid #ffeba7;
+    background: url(../img/calendar.png) no-repeat right 11px center /18px auto;
+    background-color: #313241;
+    color: #ffeba7;
+    padding-left: 15px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    color: transparent;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}

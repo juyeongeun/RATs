@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>근태관리</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" type="text/css" href="/css/home.css">
+</head>
+
+<body>
+  <div class="page">
+    <div style="display: flex; align-items: center;">
+      <p style="color:#fff787; margin-left:3px; text-align: left; font-size: 20px; font-weight: 750;">
+        Auto Absenteeism Management
+      </p>
+      <img src="img/logo.png" style="width:165px; height:80px;margin-left:1100px">
+    </div>
+  </div>
+  
+  <div class="header">
+    <input type="text" name="search" id="search" style="width:635px;height:24px; border:none; border-radius: 3px;"
+      placeholder="Employee Name" onfocus="this.placeholder=''" onblur="this.placeholder='Employee Name'">
+    <button type="button" name="employee_search" id="employee_search"
+      style="margin-left: 10px; height:24px">Search</button>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </div>
+  <hr >
+  <div class="menu">
+    <form method="post" style="margin-bottom: 15px;">
+      <label style="color:#fff787;">ADD Employee</label>
+      <div align="center" class="topmargin">
+        <input type="text" name="name"
+          style="width:150px; height:20px; background-color: #f1f1f1; border:none; border-radius: 3px;"
+          placeholder="NAME" onfocus="this.placeholder=''" onblur="this.placeholder='NAME'">
+      </div>
+      <div align="center" class="topmargin">
+        <input type="text" name="mac"
+        style="width:150px; height:20px; background-color: #f1f1f1; border:none; border-radius: 3px;"
+          placeholder="MAC Addr" onfocus="this.placeholder=''" onblur="this.placeholder='MAC Addr'">
+      </div>
+
+      <div align="center" class="topmargin">
+        <button type="submit" name="insert_btn" id="insert_btn" onclick="window.location.reload()"
+          style="margin-right: 15px;">ADD</button>
+        <button type="submit" name="delete_btn" id="delete_btn" onclick="window.location.reload() ">DEL</button>
+      </div>
+    </form>
+    <hr>
+
+    <!--데이터와 주석이 치환됨-->
+    <label style="color:#fff787; font-size: 16px; font-weight: bold;">Employee List</label>
+    <hr>
+    <div class="scroll">
+      
+
+      <ul id="employee-list">
+        <!-- employee list -->
+      </ul>
+      <ul id="result">
+      </ul>
+    </div>
+  </div>
+  <div class="content">
+    <form method="post">
+      <div align="left">
+        <label style="margin-right: 250px;">Time Packet</label>
+        <input type='date' id='currentDate' />
+        <label style="margin-left:250px">Month Packet Graph</label>
+      </div>
+      <script>
+        //js에선 UTC 기준의 시간과 날짜 생성 -> 타임존(로컬타임)과 UTC 차이를 계산해서 날짜 출력
+        var now = new Date();
+        var tzoffset = now.getTimezoneOffset() * 60000; // milliseconds
+        var localISOTime = new Date(now - tzoffset).toISOString().slice(0, -1);
+        document.getElementById('currentDate').value = localISOTime.substr(0, 10);
+      </script>
+    </form>
+    <div style="word-spacing: 35px; text-align: left; margin-left:35px; padding:5px;">DATE &nbsp;TIME &nbsp; MAC
+      &nbsp; STATUS</div>
+    <div id="employee-packet" class="container" style="float:left;">
+      <!-- employee packet -->
+    </div>
+    <div style="float:left; margin-left:50px; width: 650px; height: 300px;">
+      <canvas id="monthChart" name="monthChart" width="645px" height="300px"></canvas>
+    </div>
+  </div>
+
+  <hr align="left" style="width:100per; margin-top: 100px;">
+
+  <div class="footer">
+    <div align="left">
+      <label style="margin-left: 100px; ">Time Packet Graph</label>
+    </div>
+    <canvas id="myChart" name="myChart" width="1550px" height="295px"></canvas>
+  </div>
+  </div>
+  
+  <script>
+    // 추가 버튼 클릭시
+    document.getElementById("insert_btn").addEventListener("click", function () {
+      event.preventDefault();
+      const name = document.getElementsByName('name')[0].value;
+      const mac = document.getElementsByName('mac')[0].value;
+
+      // JSON 형식으로 데이터를 생성하여 전송
+      const data = { name: name, mac: mac };
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', '/insert', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          console.log(xhr.responseText);
+        }
+      };
+      xhr.send(JSON.stringify(data));
+    });
+
+    //삭제 버튼 클릭시
+    document.getElementById("delete_btn").addEventListener("click", function () {
+      event.preventDefault();
+      const name = document.getElementsByName('name')[0].value;
+      const mac = document.getElementsByName('mac')[0].value;
+
+      // JSON 형식으로 데이터를 생성하여 전송
+      const data = { name: name, mac: mac };
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', '/delete', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          console.log(xhr.responseText);
+        }
+      };
+      xhr.send(JSON.stringify(data));
+    });
+
+    // li 태그를 클릭하면 해당 항목의 name과 mac 값을 POST 요청으로 서버에 보냄
+    document.querySelectorAll('.list-item').forEach((item) => {
+      item.addEventListener('click', function () {
+        const [name, mac] = this.innerText.split(' ');
+        const data = { name, mac };
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/data', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            const packetDiv = document.getElementById('employee-packet');
+            packetDiv.innerHTML = xhr.responseText;
+            updateChart(); //업데이트하고 그려진 차트 가져오기
+            monthupdateChart();
+          }
+        };
+        xhr.send(JSON.stringify(data));
+      });
+    });
+
+    // 차트 업데이트 함수
+    function updateChart() {
+      fetch('/chart-data', { cache: 'no-cache' })
+        .then((response) => response.json())
+        .then((data) => {
+          // 차트 초기화 하기
+          const canvas = document.getElementById('myChart');
+          const oldChart = Chart.getChart(canvas);
+          if (oldChart) {
+            oldChart.destroy();
+          }
+          //차트 그리기
+          const chart = new Chart(canvas, {
+            type: 'line',
+            data: data,
+            options: {
+              plugins: {
+                legend: {
+                  labels: {
+                    usePointStyle: true,
+                    color: 'white',
+                  },
+                },
+              },
+              scales: {
+                x: {
+                  ticks: {
+                    autoSkip: true,
+                    maxTicksLimit: 24,
+                    color: 'white',
+                  },
+                  scaleLabel: {
+                    display: false,
+                  }
+                }
+              },
+              y: {
+                min: 0,
+                max: 1,
+                ticks: {
+                  stepSize: 1,
+                },
+              },
+              stepped: true,
+              pointStyle: 'line',
+              pointRadius: 0,
+
+            }
+          });
+          chart.data = data;
+          chart.update();
+        })
+        .catch((error) => console.error(error));
+    }
+
+    //월별 차트
+    function monthupdateChart() {
+      fetch('/chart-mdata', { cache: 'no-cache' })
+        .then((response) => response.json())
+        .then((data) => {
+          // 차트 초기화 하기
+          const canvas = document.getElementById('monthChart');
+          const oldChart = Chart.getChart(canvas);
+          if (oldChart) {
+            oldChart.destroy();
+          }
+          // const maxYValue = Math.max(...data.datasets[0].data);
+
+          //차트 그리기
+          const chart = new Chart(canvas, {
+            type: 'line',
+            data: data,
+            options: {
+              plugins: {
+                legend: {
+                  labels: {
+                    usePointStyle: true,
+                    color: 'white',
+                  },
+                },
+              },
+              scales: {
+                x: {
+                  ticks: {
+                    autoSkip: true,
+                    maxTicksLimit: 24,
+                    color: 'white',
+                  },
+                  y: {
+                    ticks: {
+                      beginAtZero: true,
+                      stepSize: 1,
+                    },
+
+                  },
+                  scaleLabel: {
+                    display: false,
+                  }
+                }
+              },
+              stepped: true,
+              pointStyle: 'line',
+              pointRadius: 0,
+            },
+
+          });
+          chart.data = data;
+          chart.update();
+        })
+        .catch((error) => console.error(error));
+    }
+
+    // 검색 버튼 클릭 이벤트 등록
+    document.getElementById("employee_search").addEventListener("click", function () {
+
+      var keyword = $('#search').val(); // 검색어 가져오기
+      var $lis = $('ul li'); // 모든 li 태그 선택
+
+      // 검색어에 해당하는 li 엘리먼트를 포함하는 새로운 ul 엘리먼트 생성
+      var $ul = $('<ul>');
+
+      var $firstMatch = $lis.filter(function () {
+        return $(this).text().indexOf(keyword) !== -1;
+      }).first();
+
+      $lis.each(function () {
+        var $this = $(this);
+        if ($this.text().indexOf(keyword) !== -1) {
+          $('ul#employee-list').hide();
+          //$this.addClass('highlight');
+          // 새로운 li 엘리먼트 생성하여 검색 결과 ul에 추가
+          $('<li><a href="#" class="list-item" name="employee-li" id="employee-li" style="text-decoration:none; color:#ffeba7;"></a></li>')
+            .find('a')
+            .text($this.text())
+            .click(function () {
+              const [name, mac] = $(this).text().split(' ');
+              const data = { name, mac };
+              const xhr = new XMLHttpRequest();
+              xhr.open('POST', '/data', true);
+              xhr.setRequestHeader('Content-Type', 'application/json');
+              xhr.onreadystatechange = function () {
+                if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                  const packetDiv = document.getElementById('employee-packet');
+                  packetDiv.innerHTML = xhr.responseText;
+                  updateChart(); //업데이트하고 그려진 차트 가져오기
+                  monthupdateChart();
+                }
+              };
+              xhr.send(JSON.stringify(data));
+            })
+            .end()
+            .appendTo($ul);
+        }
+      });
+
+      // 기존 검색 결과 삭제
+      $('ul#result').empty();
+
+
+      // 새로운 검색 결과 추가
+      $('ul#result').append($ul.children());
+    });
+
+    // input 요소의 change 이벤트 리스너 등록
+    document.getElementById("currentDate").addEventListener("change", function () {
+      // 선택한 날짜 가져오기
+      var selectedDate = this.value;
+
+      // 서버에 선택한 날짜 보내기
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "/selectdate", true);
+      xhr.setRequestHeader("Content-type", "application/json");
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          console.log(xhr.responseText);
+        }
+      };
+      xhr.send(JSON.stringify({ selectedDate: selectedDate }));
+    });
+  </script>
+</body>
+
+</html>
