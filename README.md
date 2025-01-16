@@ -36,12 +36,34 @@
 
 ### Database
 
-<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
+<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> <img src="https://img.shields.io/badge/-goorm-303237?style=for-the-badge&logo=&logoColor=white" height="30" alt="goorm logo"  />
 
 ### ETC
 
 <img src="https://img.shields.io/badge/apachekafka-231F20?style=for-the-badge&logo=apachekafka&logoColor=white"> <img src="https://img.shields.io/badge/C-A8B9CC?style=for-the-badge&logo=C&logoColor=white"> 
 
+---
+ 
+## **💡 역할**
+### 주영은
+- Frontend
+  - 로그인 및 회원가입 페이지 제작
+  - 관리자 페이지 제작
+- Backend
+  - goorm.io 사용해 외부 접속 가능한 db 생성
+  - DB 모델링
+  - 패킷
+    - 패킷 추가 API
+    - 패킷 조회 API
+  - 사용자
+    - 관리자 회원가입 및 로그인 API
+    - 근로자 추가 API
+    - 근로자 삭제 API
+
+### 강세훈
+- Wifi 패킷
+  - Wifi 패킷 감지 구현
+ 
 ---
  
 ## **🚀 주요 기능**
