@@ -1,6 +1,8 @@
 # **Capstone**
 > 실시간 출퇴근 추적 시스템 (RATs)
 
+[🎥 시연영상](https://drive.google.com/file/d/1mXTXmRcwW_hUl8scTNMFR0lXF4T01Vt_/view?usp=drive_link)
+
 ## **👨‍👩‍👧 팀원 구성**
 #### 팀장 : 강세훈 (20173037)
 #### 팀원 : 주영은 (20203093)
