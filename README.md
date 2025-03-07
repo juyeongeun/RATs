@@ -92,6 +92,8 @@
 
 ## **🔗 링크**
 
-- [📄 PPT](https://github.com/user-attachments/files/18391744/_20173037._20203093.pptx)
-- [📄 프로젝트 요약](https://github.com/user-attachments/files/18391785/_.pdf)
+- [📄 PPT](https://github.com/user-attachments/files/19121405/RATs.Presentation.pdf)
+
+- [📄 프로젝트 요약](https://github.com/user-attachments/files/19121439/RATs.pdf)
+
 
