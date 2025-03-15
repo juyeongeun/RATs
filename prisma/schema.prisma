@@ -19,12 +19,14 @@ enum Status {
 }
 
 model Admin {
-  id        Int        @id @default(autoincrement())
-  email     String     @unique
-  password  String
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  employees Employee[]
+  id           Int        @id @default(autoincrement())
+  email        String     @unique
+  password     String
+  accessToken  String?
+  refreshToken String?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  employees    Employee[]
 }
 
 model Employee {
