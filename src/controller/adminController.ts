@@ -4,7 +4,7 @@ import adminService from "../service/adminService";
 import cookiesConfig from "../config/cookiesConfig";
 import asyncHandle from "../util/error/asyncHandle";
 import passport from "../config/passportConfig";
-
+import { CustomAdmin } from "../types/express";
 const router = Router();
 
 router.post(
@@ -50,7 +50,7 @@ router.post(
       throw new Error("인증되지 않은 사용자입니다.");
     }
 
-    const user = req.user as any;
+    const user = req.user as CustomAdmin;
     const userId = user.id;
 
     await adminService.updateAdmin(userId, {

@@ -9,3 +9,13 @@ declare global {
     interface User extends Admin {}
   }
 }
+
+export interface CustomAdmin {
+  id: number;
+  email: string;
+  password: string;
+  accessToken: string | null;
+  refreshToken: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+}
