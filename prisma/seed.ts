@@ -41,10 +41,10 @@ async function main() {
         const dateStr = currentDate.toISOString().split("T")[0]; // YYYY-MM-DD 형식
 
         const timeStamps = [
-          { time: `${dateStr}T09:00:00.000Z`, status: Status.CONNECT }, // 출근
-          { time: `${dateStr}T12:00:00.000Z`, status: Status.DISCONNECT }, // 점심 외출
-          { time: `${dateStr}T13:00:00.000Z`, status: Status.CONNECT }, // 점심 복귀
-          { time: `${dateStr}T18:00:00.000Z`, status: Status.DISCONNECT }, // 퇴근
+          { time: `${dateStr}T09:00:00.000Z`, status: "CONNECT" }, // 출근
+          { time: `${dateStr}T12:00:00.000Z`, status: "DISCONNECT" }, // 점심 외출
+          { time: `${dateStr}T13:00:00.000Z`, status: "CONNECT" }, // 점심 복귀
+          { time: `${dateStr}T18:00:00.000Z`, status: "DISCONNECT" }, // 퇴근
         ];
 
         // 패킷 데이터 삽입
