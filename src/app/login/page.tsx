@@ -7,9 +7,21 @@ import ic_visibility_on from "../../../public/img/ic_visibility_on.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-
+import { login } from "../../api/admin";
 export default function LoginPage() {
   const [isVisible, setIsVisible] = useState(ic_visibility_off);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await login(email, password);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className={styles.loginContainer}>
@@ -21,7 +33,7 @@ export default function LoginPage() {
           height={100}
           className={styles.logo}
         />
-        <form className={styles.loginForm}>
+        <form className={styles.loginForm} onSubmit={handleSubmit}>
           <div className={styles.formGroup}>
             <label htmlFor="email" className={styles.formLabel}>
               이메일
@@ -31,6 +43,8 @@ export default function LoginPage() {
               id="email"
               className={styles.formInput + " " + styles.formInputEmail}
               placeholder="이메일을 입력하세요"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className={styles.formGroup}>
@@ -42,6 +56,8 @@ export default function LoginPage() {
               id="password"
               className={styles.formInput + " " + styles.formInputPassword}
               placeholder="비밀번호를 입력하세요"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <Image
               src={isVisible}
