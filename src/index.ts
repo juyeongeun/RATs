@@ -10,9 +10,18 @@ dotenv.config();
 
 const app: Application = express();
 
-app.use(cors());
 app.use(express.json());
 
+const allowedOrigins = process.env.FRONTEND_URL;
+
+// CORS 설정
+const corsOptions = {
+  credentials: true,
+  origin: process.env.FRONTEND_URL,
+  exposedHeaders: ["set-cookie"],
+};
+
+app.use(cors(corsOptions));
 app.use(passport.initialize());
 
 app.use("/admin", adminController);
