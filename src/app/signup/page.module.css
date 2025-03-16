@@ -101,6 +101,15 @@
   margin-top: 0.5rem;
 }
 
+.move {
+  color: #ffeba7;
+  cursor: pointer;
+}
+
+.move:hover {
+  color: #fee48c;
+}
+
 .errorMessage {
   color: rgb(249, 85, 85);
   font-size: 12px;

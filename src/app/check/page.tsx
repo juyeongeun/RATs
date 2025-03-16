@@ -1,3 +1,7 @@
 export default function Check() {
-  return <div>Check</div>;
+  return (
+    <>
+      <div>Check</div>
+    </>
+  );
 }

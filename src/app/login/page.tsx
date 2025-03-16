@@ -53,6 +53,7 @@ export default function LoginPage() {
           width={150}
           height={100}
           className={styles.logo}
+          priority
         />
 
         <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)}>
@@ -87,6 +88,7 @@ export default function LoginPage() {
                 height={24}
                 className={styles.formInputIcon}
                 onClick={togglePasswordVisibility}
+                priority
               />
             </div>
             {errors.password && (
@@ -107,14 +109,15 @@ export default function LoginPage() {
 
         <div className={styles.signupLink}>
           <span>아직 회원이 아니신가요? </span>
-          <Link href="/signup">회원가입</Link>
+          <Link href="/signup" className={styles.move}>
+            회원가입
+          </Link>
         </div>
       </div>
     </div>
   );
 }
 
-// 재사용 가능한 폼 필드 컴포넌트
 interface FormFieldProps {
   id: string;
   label: string;

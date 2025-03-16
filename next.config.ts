@@ -13,6 +13,9 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  experimental: {
+    optimizeCss: true,
+  },
   webpack: (config, { isServer }) => {
     if (isServer) {
       config.resolve.alias["msw/browser"] = false;

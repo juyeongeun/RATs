@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupValidation, SignupForm } from "../util/signupValidation";
 import { useRouter } from "next/navigation";
+import Modal from "@/components/modal/Modal";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -41,7 +42,7 @@ export default function SignupPage() {
       await signup(data.email, data.password);
       router.push("/login");
     } catch (error) {
-      // 모달 넣어주기
+      <Modal message="이미 존재하는 이메일입니다." title="이메일 중복 오류" />;
     }
   };
 
@@ -54,6 +55,7 @@ export default function SignupPage() {
           width={150}
           height={100}
           className={styles.logo}
+          priority
         />
         <form className={styles.signupForm} onSubmit={handleSubmit(onSubmit)}>
           <FormField
@@ -97,7 +99,9 @@ export default function SignupPage() {
 
         <div className={styles.loginLink}>
           <span>이미 회원이신가요? </span>
-          <Link href="/login">로그인</Link>
+          <Link href="/login" className={styles.move}>
+            로그인
+          </Link>
         </div>
       </div>
     </div>
@@ -185,6 +189,7 @@ function PasswordField({
           height={24}
           className={styles.formInputIcon}
           onClick={toggleVisibility}
+          priority
         />
       </div>
       {error && <p className={styles.errorMessage}>{error.message}</p>}
