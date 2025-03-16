@@ -1,15 +1,10 @@
 import { axiosInstance } from "./apiClient";
 
-interface IAdmin {
-  id: number;
-  name: string;
-  email: string;
-  password: string;
-}
+const PATH = "/admin";
 
 //로그인
 const login = async (email: string, password: string) => {
-  const response = await axiosInstance.post("/auth/login", {
+  const response = await axiosInstance.post(`${PATH}/login`, {
     email,
     password,
   });
@@ -19,7 +14,7 @@ const login = async (email: string, password: string) => {
 
 //로그아웃
 const logout = async () => {
-  await axiosInstance.post("/auth/logout");
+  await axiosInstance.post(`${PATH}/logout`);
 };
 
 export { login, logout };

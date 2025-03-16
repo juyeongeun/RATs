@@ -7,8 +7,11 @@ import ic_visibility_on from "../../../public/img/ic_visibility_on.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { login } from "../../api/admin";
+import { login } from "@/api/admin";
+import { useRouter } from "next/navigation";
+import { useAdminStore } from "@/store/adminStore";
 export default function LoginPage() {
+  const router = useRouter();
   const [isVisible, setIsVisible] = useState(ic_visibility_off);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,7 +20,11 @@ export default function LoginPage() {
     e.preventDefault();
     try {
       const response = await login(email, password);
-      console.log(response);
+      useAdminStore.setState({
+        id: response.id,
+        email: response.email,
+      });
+      router.push("/check");
     } catch (error) {
       console.error(error);
     }

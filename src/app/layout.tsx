@@ -12,8 +12,8 @@ const pretendard = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "로그인",
-  description: "로그인 페이지",
+  title: "RATS",
+  description: "RATS: 실시간 출퇴근 관리 시스템",
 };
 
 export default function RootLayout({
