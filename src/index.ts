@@ -14,8 +14,10 @@ app.use(express.json());
 
 // CORS 설정
 const corsOptions = {
+  origin: ["http://localhost:3000", "https://your-production-domain.com"],
   credentials: true,
-  origin: process.env.FRONTEND_URL,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+  allowedHeaders: ["Content-Type", "Authorization"],
   exposedHeaders: ["set-cookie"],
 };
 
