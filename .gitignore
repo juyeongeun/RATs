@@ -3,3 +3,13 @@ package-lock.json
 package.json
 .next
 .gitignore
+
+#System File
+.DS_Store
+
+#env
+.env
+
+#etc
+dist
+coverage

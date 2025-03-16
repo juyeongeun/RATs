@@ -1,0 +1,177 @@
+/*!**************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/app/signup/page.module.css ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************/
+.page_signupContainer__DRR_a {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.page_signupBox__zSxSi {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 40px;
+  gap: 1rem;
+  background-color: #313241;
+  border-radius: 32px;
+}
+
+.page_logo__tFoUk {
+  width: 150px;
+  height: 100px;
+  margin-bottom: 1rem;
+}
+
+.page_signupForm__I47jO {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.page_formGroup__pxXxY {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  position: relative;
+}
+
+.page_formLabel__Yp_IR {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.page_formInput__EQ166 {
+  width: 100%;
+  padding: 12px 16px 12px 55px;
+  border: 1px solid #1f2029;
+  border-radius: 8px;
+  background-color: #1f2029;
+  color: #fff;
+}
+
+.page_formInput__EQ166::placeholder {
+  color: #666;
+}
+
+.page_formInput__EQ166:focus {
+  outline: 1px solid #ffeba7;
+}
+
+.page_formInputEmail__h9nBN {
+  background-image: url("/img/id.png");
+  background-size: 35px 35px;
+  background-position: 8px 50%;
+  background-repeat: no-repeat;
+}
+
+.page_formInputPassword__fqv_M {
+  background-image: url("/img/pw.png");
+  background-size: 35px 35px;
+  background-position: 8px 50%;
+  background-repeat: no-repeat;
+}
+
+.page_formInputIcon__wFHYf {
+  position: absolute;
+  top: 43px;
+  right: 16px;
+}
+
+.page_signupButton__JyWtr {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 16px 16px;
+  background-color: #ffeba7;
+  color: #111b3a;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.page_signupButton__JyWtr:hover {
+  background-color: #fee48c;
+}
+
+.page_loginLink__FpHKu {
+  font-size: 12px;
+  margin-top: 0.5rem;
+}
+
+.page_move__AH1RJ {
+  color: #ffeba7;
+  cursor: pointer;
+}
+
+.page_move__AH1RJ:hover {
+  color: #fee48c;
+}
+
+.page_errorMessage__6eUwI {
+  color: rgb(249, 85, 85);
+  font-size: 12px;
+}
+
+/*!*********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/components/modal/modal.module.css ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************/
+.modal_modal__CZ9gP {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 150px;
+  background-color: #fbe59e;
+  border-radius: 24px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal_modalContent__lWPuJ {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.modal_modalTitle__B50_6 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2029;
+  margin-bottom: 14px;
+}
+
+.modal_modalMessage__NJ9Ko {
+  font-size: 16px;
+  font-weight: 400;
+  color: #1f2029;
+  margin-bottom: 28px;
+}
+
+.modal_modalButton__GS1PU {
+  background-color: #2b2d3b;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 20px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.modal_modalButton__GS1PU:hover {
+  background-color: #3b3d4b;
+}
+
