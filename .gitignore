@@ -1,6 +1,4 @@
 node_modules
-# Keep environment variables out of version control
-.env
 
 #System File
 .DS_Store
@@ -14,3 +12,5 @@ node_modules
 #etc
 dist
 coverage
+
+.next
