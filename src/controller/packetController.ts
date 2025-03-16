@@ -2,7 +2,6 @@ import { Router } from "express";
 import packetService from "../service/packetService";
 import asyncHandle from "../util/error/asyncHandle";
 import passport from "../config/passportConfig";
-import { CustomAdmin } from "../types/express";
 import { Request, Response, NextFunction } from "express";
 
 const router = Router();
@@ -14,10 +13,6 @@ router.get(
     const { employeeId } = req.params;
     const cursor = req.query.cursor ? Number(req.query.cursor) : undefined;
     const limit = req.query.limit ? Number(req.query.limit) : 5;
-
-    // 날짜 파라미터 처리
-    const startDate = req.query.startDate as string | undefined;
-    const endDate = req.query.endDate as string | undefined;
 
     // 특정 날짜만 조회하는 경우
     const date = req.query.date as string | undefined;

@@ -11,7 +11,7 @@ const createAdmin = async (email: string, password: string) => {
 
 const getAdminByEmail = async (email: string) => {
   const admin = await prismaClient.admin.findUnique({ where: { email } });
-  return { message: "로그인 성공", admin };
+  return { admin };
 };
 
 const updateAdmin = async (id: number, data: Partial<Admin>) => {

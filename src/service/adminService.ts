@@ -17,7 +17,7 @@ interface CustomAdmin {
 
 const filterSensitiveUserData = (user: Admin) => {
   //리스폰스의 민감한 정보를 빼고 보낸다
-  const { password, refreshToken, ...rest } = user;
+  const { password, accessToken, refreshToken, ...rest } = user;
   return rest;
 };
 
@@ -32,6 +32,12 @@ const createToken = (admin: CustomAdmin, type: "access" | "refresh") => {
 };
 
 const adminSignup = async (email: string, password: string) => {
+  const checkEmail = await adminRepository.getAdminByEmail(email);
+
+  if (checkEmail) {
+    throw new Error("이미 존재하는 이메일입니다.");
+  }
+
   const hashedPassword = await bcrypt.hash(password, 10);
   const { admin } = await adminRepository.createAdmin(email, hashedPassword);
   return { admin: filterSensitiveUserData(admin) };
@@ -58,6 +64,7 @@ const adminLogin = async (email: string, password: string) => {
   });
 
   return {
+    message: "로그인 성공",
     admin: {
       ...filterSensitiveUserData(updatedAdmin),
       accessToken,
