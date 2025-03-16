@@ -100,3 +100,8 @@
   font-size: 12px;
   margin-top: 0.5rem;
 }
+
+.errorMessage {
+  color: rgb(249, 85, 85);
+  font-size: 12px;
+}
