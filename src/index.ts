@@ -12,8 +12,6 @@ const app: Application = express();
 
 app.use(express.json());
 
-const allowedOrigins = process.env.FRONTEND_URL;
-
 // CORS 설정
 const corsOptions = {
   credentials: true,
