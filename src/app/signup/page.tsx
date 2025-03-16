@@ -10,10 +10,10 @@ import { useState } from "react";
 
 export default function SignupPage() {
   const [isVisible, setIsVisible] = useState(ic_visibility_off);
-
+  const [isVisibleCheck, setIsVisibleCheck] = useState(ic_visibility_off);
   return (
-    <div className={styles.loginContainer}>
-      <div className={styles.loginBox}>
+    <div className={styles.signupContainer}>
+      <div className={styles.signupBox}>
         <Image
           src={logoImg}
           alt="logo"
@@ -21,7 +21,7 @@ export default function SignupPage() {
           height={100}
           className={styles.logo}
         />
-        <form className={styles.loginForm}>
+        <form className={styles.signupForm}>
           <div className={styles.formGroup}>
             <label htmlFor="email" className={styles.formLabel}>
               이메일
@@ -58,13 +58,38 @@ export default function SignupPage() {
               }}
             />
           </div>
-          <button type="submit" className={styles.loginButton}>
-            로그인
+          <div className={styles.formGroup}>
+            <label htmlFor="password" className={styles.formLabel}>
+              비밀번호 확인
+            </label>
+            <input
+              type={isVisibleCheck === ic_visibility_off ? "password" : "text"}
+              id="password"
+              className={styles.formInput + " " + styles.formInputPassword}
+              placeholder="비밀번호를 한 번 더 입력해주세요"
+            />
+            <Image
+              src={isVisibleCheck}
+              alt="ic_visibility_off"
+              width={24}
+              height={24}
+              className={styles.formInputIcon}
+              onClick={() => {
+                setIsVisibleCheck(
+                  isVisibleCheck === ic_visibility_off
+                    ? ic_visibility_on
+                    : ic_visibility_off
+                );
+              }}
+            />
+          </div>
+          <button type="submit" className={styles.signupButton}>
+            회원가입
           </button>
         </form>
-        <div className={styles.signupLink}>
-          <span>아직 회원이 아니신가요? </span>
-          <Link href="/signup">회원가입</Link>
+        <div className={styles.loginLink}>
+          <span>이미 회원이신가요? </span>
+          <Link href="/login">로그인</Link>
         </div>
       </div>
     </div>
