@@ -34,7 +34,7 @@ const createToken = (admin: CustomAdmin, type: "access" | "refresh") => {
 const adminSignup = async (email: string, password: string) => {
   const checkEmail = await adminRepository.getAdminByEmail(email);
 
-  if (checkEmail) {
+  if (checkEmail.admin) {
     throw new Error("이미 존재하는 이메일입니다.");
   }
 
