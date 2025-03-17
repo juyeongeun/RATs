@@ -1,0 +1,98 @@
+.upDataContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  padding: 16px 16px 0 16px;
+}
+
+.upDataLeft {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.upDataHeader {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.upDataHeaderInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.upDataHeaderTitle {
+  font-size: 16px;
+}
+
+.upDataHeaderDateContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.upDataHeaderDate {
+  position: relative;
+  width: 150px;
+  font-size: 14px;
+  color: #ffeba7;
+  background-color: #1f2029;
+  border-radius: 16px;
+  padding: 4px 12px;
+  border: 1px solid #ffeba7;
+  cursor: pointer;
+  background-image: url("/img/calendar.png");
+  background-size: 18px;
+  background-position: 115px 50%;
+  background-repeat: no-repeat;
+}
+
+.packetListContainer {
+  width: 100%;
+  min-height: 0px;
+  max-height: 250px;
+  overflow-y: scroll;
+  position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: #ffeba7 transparent;
+  padding-right: 8px;
+}
+
+.packetListTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.packetListTable thead {
+  position: sticky;
+  top: 0;
+  background-color: #1f2029;
+  box-shadow: 0 1px 0 #ffeba7;
+}
+
+.packetListTable th {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.tableBodyContainer {
+  width: 100%;
+}
+
+.packetListTable tbody td {
+  text-align: center;
+  padding: 12px 0;
+}
+
+.upDataRight {
+  width: 100%;
+  height: 100%;
+}

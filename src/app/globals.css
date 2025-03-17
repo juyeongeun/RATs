@@ -115,6 +115,15 @@ body {
   background-color: #1f2029;
 }
 
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
 ol,
 ul {
   list-style: none;
@@ -142,6 +151,8 @@ table {
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-rgb: 255, 255, 255;
+  height: 100%;
+  width: 100%;
 }
 
 /* Additional Base Styles */

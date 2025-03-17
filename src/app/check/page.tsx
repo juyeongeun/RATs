@@ -3,8 +3,11 @@
 import { useEffect, useState } from "react";
 import Header from "@/components/header/Header";
 import EmployeeList from "@/components/employeeList/EmployeeList";
+import UpData from "@/components/dataList/UpData";
+import DownData from "@/components/dataList/DownData";
 import styles from "./page.module.css";
 import { getEmployee } from "@/api/employee";
+import { getPacketList, getPacketMonthList } from "@/api/packet";
 
 interface Employee {
   id: number;
@@ -15,73 +18,88 @@ interface Employee {
   adminId: number;
 }
 
-interface PaginationInfo {
-  nextCursor: number | null;
-  hasMore: boolean;
-}
-
 interface EmployeeResponse {
   employees: Employee[];
-  pagination: PaginationInfo;
+}
+
+interface Packet {
+  id: number;
+  time: string;
+  macAddress: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+  employeeId: number;
 }
 
 export default function Check() {
   const [employeeList, setEmployeeList] = useState<Employee[]>([]);
-  const [pagination, setPagination] = useState<PaginationInfo | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [packetList, setPacketList] = useState<Packet[]>([]);
+  const [packetMonthList, setPacketMonthList] = useState<Packet[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [selectedEmployeeId, setSelectedEmployeeId] = useState<number | null>(
+    null
+  );
+  const [selectedDate, setSelectedDate] = useState<string>(
+    new Date().toISOString().split("T")[0]
+  );
+  const [isLoading, setIsLoading] = useState(false);
 
-  // 초기 데이터 로드
   useEffect(() => {
     fetchEmployees();
   }, []);
 
-  // 직원 데이터 가져오기
-  const fetchEmployees = async (cursor?: number, keyword?: string) => {
+  const fetchEmployees = async (keyword?: string) => {
     try {
-      setIsLoading(true);
-      const response: EmployeeResponse = await getEmployee(cursor, keyword);
-
-      if (cursor) {
-        // 추가 데이터 로드 시 기존 목록에 추가
-        setEmployeeList((prev) => [...prev, ...response.employees]);
-      } else {
-        // 초기 로드
-        setEmployeeList(response.employees);
-      }
-
-      setPagination(response.pagination);
+      const response: EmployeeResponse = await getEmployee(keyword);
+      setEmployeeList(response.employees);
     } catch (err) {
       console.error("직원 목록 가져오기 실패:", err);
       setError("직원 목록을 불러오는데 실패했습니다.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // 더 보기 버튼 클릭 핸들러
-  const handleLoadMore = () => {
-    if (pagination?.hasMore && pagination?.nextCursor) {
-      fetchEmployees(pagination.nextCursor);
     }
   };
 
   const handleSearch = (keyword: string) => {
-    fetchEmployees(0, keyword);
+    fetchEmployees(keyword);
   };
 
-  // Check 컴포넌트 내부에 새로고침 함수 추가
   const handleRefresh = () => {
-    // 데이터 초기화 후 다시 불러오기
     setEmployeeList([]);
-    setPagination(null);
     fetchEmployees();
+  };
+
+  const handleShow = async (id: number) => {
+    setSelectedEmployeeId(id);
+    await fetchPacketData(id, selectedDate);
+  };
+
+  const handleDateChange = async (date: Date) => {
+    const formattedDate = date.toISOString().split("T")[0];
+    setSelectedDate(formattedDate);
+
+    // 선택된 직원이 있을 때만 데이터 가져오기
+    if (selectedEmployeeId !== null) {
+      await fetchPacketData(selectedEmployeeId, formattedDate);
+    }
+  };
+
+  const fetchPacketData = async (employeeId: number, date: string) => {
+    try {
+      const data = await getPacketList(employeeId, date);
+      const monthData = await getPacketMonthList(employeeId, date);
+      setPacketList(data);
+      setPacketMonthList(monthData);
+    } catch (error) {
+      console.error("패킷 데이터 가져오기 실패:", error);
+      setPacketList([]);
+      setPacketMonthList([]);
+    }
   };
 
   return (
     <div className={styles.container}>
       <Header handleSearch={handleSearch} />
-      <div className={styles.line}></div>
+      <hr />
       <div className={styles.dataContainer}>
         {error ? (
           <div className={styles.errorMessage}>{error}</div>
@@ -89,12 +107,28 @@ export default function Check() {
           <>
             <EmployeeList
               employees={employeeList}
-              isLoading={isLoading}
               onRefresh={handleRefresh}
+              onShow={handleShow}
             />
             <div className={styles.verticalLine}></div>
           </>
         )}
+        <div className={styles.packetContainer}>
+          <UpData
+            packetList={packetList}
+            packetMonthList={packetMonthList}
+            date={selectedDate}
+            onDateChange={handleDateChange}
+            isLoading={isLoading}
+            employeeName={
+              employeeList.find(
+                (employee) => employee.id === selectedEmployeeId
+              )?.name || ""
+            }
+          />
+          <hr />
+          <DownData />
+        </div>
       </div>
     </div>
   );

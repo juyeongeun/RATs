@@ -26,7 +26,9 @@ export default function Header({
           onChange={(e) => setKeyword(e.target.value)}
         />
         <button
-          className={styles.headerSearchButton}
+          className={
+            keyword.length > 0 ? styles.headerSearchButton : styles.disabled
+          }
           onClick={() => handleSearch(keyword)}
         >
           Search

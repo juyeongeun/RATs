@@ -41,3 +41,13 @@
   color: #1f2029;
   font-weight: bold;
 }
+
+.disabled {
+  background-color: #5e5e61;
+  color: #ffeba7;
+  width: 100px;
+  height: 32px;
+  border-radius: 16px;
+  font-weight: bold;
+  cursor: not-allowed;
+}

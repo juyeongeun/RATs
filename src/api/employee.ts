@@ -5,14 +5,9 @@ import { axiosInstance } from "./apiClient";
 const PATH = "/employee";
 
 // 직원 목록 가져오기 (페이지네이션 지원)
-const getEmployee = async (cursor?: number, keyword?: string) => {
+const getEmployee = async (keyword?: string) => {
   try {
-    const url =
-      cursor && keyword
-        ? `${PATH}?cursor=${cursor}&keyword=${keyword}&limit=30`
-        : keyword
-        ? `${PATH}?keyword=${keyword}&limit=30`
-        : `${PATH}?limit=30`;
+    const url = keyword ? `${PATH}?keyword=${keyword}` : `${PATH}`;
 
     const response = await axiosInstance.get(url);
     return response.data;

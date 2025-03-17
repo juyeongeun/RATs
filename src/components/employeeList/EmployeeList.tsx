@@ -13,14 +13,14 @@ interface Employee {
 
 interface EmployeeListProps {
   employees: Employee[];
-  isLoading: boolean;
   onRefresh: () => void;
+  onShow: (employeeId: number) => void;
 }
 
 export default function EmployeeList({
   employees,
-  isLoading,
   onRefresh,
+  onShow,
 }: EmployeeListProps) {
   const [name, setName] = useState("");
   const [macAddress, setMacAddress] = useState("");
@@ -74,7 +74,7 @@ export default function EmployeeList({
         <h3 className={styles.employeeListHeaderTitle}>ADD EMPLOYEE</h3>
         <input
           type="text"
-          placeholder="Employee Name"
+          placeholder="Name"
           className={styles.employeeListInput}
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -82,7 +82,7 @@ export default function EmployeeList({
         />
         <input
           type="text"
-          placeholder="Employee Mac Address"
+          placeholder="Mac Address"
           className={styles.employeeListInput}
           value={macAddress}
           onChange={(e) => setMacAddress(e.target.value)}
@@ -91,7 +91,11 @@ export default function EmployeeList({
         <div className={styles.employeeListButton}>
           <button
             onClick={handleEdit}
-            disabled={isAdding || isLoading || !name || !macAddress}
+            className={
+              name.length === 0 || macAddress.length === 0 || isAdding
+                ? styles.disabled
+                : styles.addBtn
+            }
           >
             {isAdding ? "추가 중..." : "ADD"}
           </button>
@@ -100,35 +104,44 @@ export default function EmployeeList({
       {/* Employee List */}
       <h2 className={styles.employeeListTitle}>Employee List</h2>
       <div className={styles.employeeList}>
-        {employees.map((employee: Employee, index: number) => {
-          const isDeleting = deletingIds.includes(employee.id);
-          return (
-            <div
-              key={`${employee.id}-${index}`}
-              className={`${styles.employeeListNameContainer} ${
-                clickedEmployeeId === employee.id ? styles.selected : ""
-              }`}
-              onClick={() => handleEmployeeClick(employee.id)}
-            >
-              <p className={styles.employeeListName}>
-                {employee.name} {employee.macAddress}
-              </p>
-              {clickedEmployeeId === employee.id && (
-                <div className={styles.employeeEditButton}>
-                  <button
-                    onClick={(e) => handleDelete(employee.id, e)}
-                    disabled={isDeleting || isLoading}
-                  >
-                    {isDeleting ? "삭제 중..." : "DEL"}
-                  </button>
-                  <button>SHOW</button>
-                </div>
-              )}
-            </div>
-          );
-        })}
-
-        {isLoading && <p>Loading...</p>}
+        {employees.length === 0 ? (
+          <p className={styles.noEmployees}>직원을 찾을 수 없습니다.</p>
+        ) : (
+          employees.map((employee: Employee, index: number) => {
+            const isDeleting = deletingIds.includes(employee.id);
+            return (
+              <div
+                key={`${employee.id}-${index}`}
+                className={`${styles.employeeListNameContainer} ${
+                  clickedEmployeeId === employee.id ? styles.selected : ""
+                }`}
+                onClick={() => handleEmployeeClick(employee.id)}
+              >
+                <p className={styles.employeeListName}>
+                  {employee.name} {employee.macAddress}
+                </p>
+                {clickedEmployeeId === employee.id && (
+                  <div className={styles.employeeEditButton}>
+                    <button
+                      onClick={(e) => handleDelete(employee.id, e)}
+                      className={
+                        isDeleting ? styles.disabled : styles.deleteBtn
+                      }
+                    >
+                      {isDeleting ? "삭제 중..." : "DEL"}
+                    </button>
+                    <button
+                      className={isDeleting ? styles.disabled : styles.showBtn}
+                      onClick={() => onShow(employee.id)}
+                    >
+                      SHOW
+                    </button>
+                  </div>
+                )}
+              </div>
+            );
+          })
+        )}
       </div>
     </div>
   );
