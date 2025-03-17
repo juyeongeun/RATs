@@ -1,0 +1,32 @@
+.tooltip {
+  background-color: #1f2029;
+  padding: 10px;
+  border: 1px solid #ffeba7;
+  border-radius: 5px;
+  color: #ffeba7;
+}
+
+.tooltipTitle {
+  margin: 0 0 5px 0;
+  font-weight: bold;
+}
+
+.tooltipContent {
+  margin: 0;
+  color: #ffeba7;
+}
+
+.downDataContainer {
+  width: 100%;
+  height: 300px;
+  background-color: #1f2029;
+  border-radius: 10px;
+  margin-top: 32px;
+}
+
+.downDataTitle {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 48px;
+}

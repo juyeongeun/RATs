@@ -16,6 +16,7 @@ export default function Home() {
         setIsLoading(false);
         router.push("/check");
       } catch (error) {
+        router.push("/login");
         console.error("사용자 정보 조회 실패:", error);
       }
     };

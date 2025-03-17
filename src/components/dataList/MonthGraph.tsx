@@ -10,6 +10,7 @@ import {
   ReferenceLine,
 } from "recharts";
 
+import styles from "./monthGraph.module.css";
 interface Packet {
   id: number;
   time: string;
@@ -105,20 +106,12 @@ function MonthGraph({ monthList }: { monthList: Packet[] }) {
   }) => {
     if (active && payload && payload.length) {
       return (
-        <div
-          style={{
-            backgroundColor: "#1f2029",
-            padding: "10px",
-            border: "1px solid #ffeba7",
-            borderRadius: "5px",
-            color: "#ffeba7",
-          }}
-        >
+        <div className={styles.tooltip}>
           <p
-            style={{ margin: "0 0 5px 0", fontWeight: "bold" }}
+            className={styles.tooltipTitle}
           >{`${payload[0].payload.timeLabel}`}</p>
           <p
-            style={{ margin: "0", color: "#ffeba7" }}
+            className={styles.tooltipContent}
           >{`연결된 횟수: ${payload[0].value}회`}</p>
         </div>
       );
@@ -135,23 +128,8 @@ function MonthGraph({ monthList }: { monthList: Packet[] }) {
   }, [maxCount]);
 
   return (
-    <div
-      style={{
-        width: "100%",
-        height: 300,
-        backgroundColor: "#1f2029",
-        borderRadius: "10px",
-        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.2)",
-      }}
-    >
-      <div
-        style={{
-          textAlign: "center",
-          marginBottom: "15px",
-        }}
-      >
-        Check Time — Month Working
-      </div>
+    <div className={styles.monthGraphContainer}>
+      <div className={styles.monthGraphTitle}>Check Time — Month Working</div>
       <ResponsiveContainer width="100%" height="95%">
         <AreaChart data={hourlyData}>
           <defs>

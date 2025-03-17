@@ -83,14 +83,32 @@ export default function UpData({
               </thead>
               {packetList.length > 0 ? (
                 <tbody className={styles.packetListTableBody}>
-                  {packetList.map((packet) => (
-                    <tr key={packet.id}>
-                      <td>{formatDate(new Date(packet.time))}</td>
-                      <td>{formatTime(new Date(packet.time))}</td>
-                      <td>{packet.macAddress}</td>
-                      <td>{packet.status}</td>
-                    </tr>
-                  ))}
+                  {(() => {
+                    const firstConnect = packetList.find(
+                      (p) => p.status === "CONNECT"
+                    );
+                    const firstConnectId = firstConnect
+                      ? firstConnect.id
+                      : null;
+
+                    return packetList.map((packet) => (
+                      <tr
+                        key={packet.id}
+                        className={
+                          packet.id === firstConnectId
+                            ? formatTime(new Date(packet.time)) <= "09:00:00"
+                              ? styles.good
+                              : styles.bad
+                            : ""
+                        }
+                      >
+                        <td>{formatDate(new Date(packet.time))}</td>
+                        <td>{formatTime(new Date(packet.time))}</td>
+                        <td>{packet.macAddress}</td>
+                        <td>{packet.status}</td>
+                      </tr>
+                    ));
+                  })()}
                 </tbody>
               ) : (
                 <tbody className={styles.packetListTableBody}>

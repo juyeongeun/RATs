@@ -2,12 +2,12 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  gap: 16px;
+  gap: 12px;
   padding: 16px 16px 0 16px;
 }
 
 .upDataLeft {
-  width: 100%;
+  width: 85%;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -41,7 +41,7 @@
 
 .upDataHeaderDate {
   position: relative;
-  width: 150px;
+  width: 130px;
   font-size: 14px;
   color: #ffeba7;
   background-color: #1f2029;
@@ -51,7 +51,7 @@
   cursor: pointer;
   background-image: url("/img/calendar.png");
   background-size: 18px;
-  background-position: 115px 50%;
+  background-position: 100px 50%;
   background-repeat: no-repeat;
 }
 
@@ -63,7 +63,6 @@
   position: relative;
   scrollbar-width: thin;
   scrollbar-color: #ffeba7 transparent;
-  padding-right: 8px;
 }
 
 .packetListTable {
@@ -90,6 +89,15 @@
 .packetListTable tbody td {
   text-align: center;
   padding: 12px 0;
+  font-size: 16px;
+}
+
+.good {
+  color: #8884d8;
+}
+
+.bad {
+  color: #ff0000;
 }
 
 .upDataRight {

@@ -18,22 +18,21 @@ export default function Header({
         priority
       />
       <h1 className={styles.headerTitle}>Auto Absenteeism Management</h1>
-      <div className={styles.headerSearch}>
+      <form
+        className={styles.headerSearch}
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSearch(keyword);
+        }}
+      >
         <input
           type="text"
           placeholder="Employee Search"
           className={styles.headerSearchInput}
           onChange={(e) => setKeyword(e.target.value)}
         />
-        <button
-          className={
-            keyword.length > 0 ? styles.headerSearchButton : styles.disabled
-          }
-          onClick={() => handleSearch(keyword)}
-        >
-          Search
-        </button>
-      </div>
+        <button className={styles.headerSearchButton}>Search</button>
+      </form>
     </div>
   );
 }

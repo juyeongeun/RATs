@@ -77,7 +77,6 @@ export default function Check() {
     const formattedDate = date.toISOString().split("T")[0];
     setSelectedDate(formattedDate);
 
-    // 선택된 직원이 있을 때만 데이터 가져오기
     if (selectedEmployeeId !== null) {
       await fetchPacketData(selectedEmployeeId, formattedDate);
     }
@@ -114,20 +113,41 @@ export default function Check() {
           </>
         )}
         <div className={styles.packetContainer}>
-          <UpData
-            packetList={packetList}
-            packetMonthList={packetMonthList}
-            date={selectedDate}
-            onDateChange={handleDateChange}
-            isLoading={isLoading}
-            employeeName={
-              employeeList.find(
-                (employee) => employee.id === selectedEmployeeId
-              )?.name || ""
-            }
-          />
-          <hr />
-          <DownData />
+          {employeeList.length > 0 ? (
+            <>
+              <UpData
+                packetList={packetList}
+                packetMonthList={packetMonthList}
+                date={selectedDate}
+                onDateChange={handleDateChange}
+                isLoading={isLoading}
+                employeeName={
+                  employeeList.find(
+                    (employee) => employee.id === selectedEmployeeId
+                  )?.name || ""
+                }
+              />
+              <hr />
+              <DownData dayList={packetList} />
+            </>
+          ) : (
+            <>
+              <UpData
+                packetList={[]}
+                packetMonthList={[]}
+                date={selectedDate}
+                onDateChange={handleDateChange}
+                isLoading={isLoading}
+                employeeName={
+                  employeeList.find(
+                    (employee) => employee.id === selectedEmployeeId
+                  )?.name || ""
+                }
+              />
+              <hr />
+              <DownData dayList={[]} />
+            </>
+          )}
         </div>
       </div>
     </div>
