@@ -32,8 +32,8 @@ axiosInstance.interceptors.response.use(
     // 토큰 만료 에러 (401) 처리
     if (error.response?.status === 401) {
       try {
-        const response = await axios.post(
-          `${baseURL}/auth/refresh`,
+        await axios.post(
+          `${baseURL}/token`,
           {},
           {
             withCredentials: true,
