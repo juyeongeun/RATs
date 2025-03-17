@@ -16,7 +16,7 @@ app.use(express.json());
 
 // CORS 설정
 const corsOptions = {
-  origin: ["http://localhost:3000"],
+  origin: ["http://localhost:3000", "https://snazzy-genie-8bf27c.netlify.app"],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization"],
