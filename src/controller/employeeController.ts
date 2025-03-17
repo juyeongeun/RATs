@@ -12,19 +12,12 @@ router.get(
   passport.authenticate("access-token", { session: false }),
   asyncHandle(async (req: Request, res: Response, next: NextFunction) => {
     const { id: adminId } = req.user as CustomAdmin;
-    const cursor = req.query.cursor ? Number(req.query.cursor) : undefined;
-    const limit = req.query.limit ? Number(req.query.limit) : 12;
     const keyword = req.query.keyword ? String(req.query.keyword) : undefined;
 
-    const { employees, nextCursor, hasMore } =
-      await employeeService.getEmployees(adminId, cursor, limit, keyword);
+    const { employees } = await employeeService.getEmployees(adminId, keyword);
 
     res.status(200).json({
       employees,
-      pagination: {
-        nextCursor,
-        hasMore,
-      },
     });
   })
 );

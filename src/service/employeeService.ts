@@ -1,12 +1,7 @@
 import employeeRepository from "../repository/employeeRepository";
 
-const getEmployees = async (
-  adminId: number,
-  cursor?: number,
-  limit?: number,
-  keyword?: string
-) => {
-  return employeeRepository.getEmployees(adminId, cursor, limit, keyword);
+const getEmployees = async (adminId: number, keyword?: string) => {
+  return employeeRepository.getEmployees(adminId, keyword);
 };
 
 const createEmployee = async (
