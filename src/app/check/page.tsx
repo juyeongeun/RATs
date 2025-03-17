@@ -90,8 +90,6 @@ export default function Check() {
             <EmployeeList
               employees={employeeList}
               isLoading={isLoading}
-              hasMore={pagination?.hasMore || false}
-              onLoadMore={handleLoadMore}
               onRefresh={handleRefresh}
             />
             <div className={styles.verticalLine}></div>

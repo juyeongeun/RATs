@@ -14,16 +14,12 @@ interface Employee {
 interface EmployeeListProps {
   employees: Employee[];
   isLoading: boolean;
-  hasMore: boolean;
-  onLoadMore: () => void;
   onRefresh: () => void;
 }
 
 export default function EmployeeList({
   employees,
   isLoading,
-  hasMore,
-  onLoadMore,
   onRefresh,
 }: EmployeeListProps) {
   const [name, setName] = useState("");
