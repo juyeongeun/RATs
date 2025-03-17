@@ -7,6 +7,7 @@ import employeeController from "./controller/employeeController";
 import packetController from "./controller/packetController";
 import tokenController from "./controller/tokenController";
 import passport from "./config/passportConfig";
+import { setupPacketArchiveCrons } from "./cron/packetArchive";
 dotenv.config();
 
 const app: Application = express();
@@ -15,7 +16,7 @@ app.use(express.json());
 
 // CORS 설정
 const corsOptions = {
-  origin: ["http://localhost:3000", "https://your-production-domain.com"],
+  origin: ["http://localhost:3000"],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization"],
@@ -35,6 +36,7 @@ if (process.env.NODE_ENV === "development") {
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
+    setupPacketArchiveCrons();
   });
 }
 
