@@ -67,7 +67,6 @@ const adminLogin = async (email: string, password: string) => {
     message: "로그인 성공",
     admin: {
       ...filterSensitiveUserData(updatedAdmin),
-      accessToken,
     },
     accessToken,
     refreshToken,
@@ -84,7 +83,7 @@ const getAdminById = async (id: number) => {
   if (!admin) {
     throw new Error("Admin not found");
   }
-  return admin;
+  return filterSensitiveUserData(admin);
 };
 
 export default {
