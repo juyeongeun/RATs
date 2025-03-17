@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { getUserInfo } from "@/api/admin";
 import { useEffect, useState } from "react";
-import axios from "axios";
 
 export default function Home() {
   const router = useRouter();
@@ -15,6 +14,7 @@ export default function Home() {
         // 사용자 정보 요청
         await getUserInfo();
         setIsLoading(false);
+        router.push("/check");
       } catch (error) {
         console.error("사용자 정보 조회 실패:", error);
       }

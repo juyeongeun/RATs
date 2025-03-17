@@ -1,0 +1,43 @@
+.headerContainer {
+  margin: 32px 52px 16px 32px;
+  display: flex;
+  height: 100px;
+  flex-direction: column;
+  gap: 32px;
+  position: relative;
+}
+
+.headerLogo {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  width: 150px;
+  height: 90px;
+}
+
+.headerTitle {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffeba7;
+}
+
+.headerSearch {
+  display: flex;
+  gap: 16px;
+}
+
+.headerSearchInput {
+  width: 400px;
+  height: 32px;
+  border-radius: 16px;
+  padding: 10px;
+}
+
+.headerSearchButton {
+  width: 100px;
+  height: 32px;
+  border-radius: 16px;
+  background-color: #ffeba7;
+  color: #1f2029;
+  font-weight: bold;
+}
