@@ -3,12 +3,8 @@ import Modal from "@/components/modal/Modal";
 
 const baseURL = "/api";
 
-// 디버깅을 위한 로그 추가
-console.log("API 클라이언트 초기화, baseURL:", baseURL);
-
 export const axiosInstance: AxiosInstance = axios.create({
   baseURL,
-  timeout: 5000,
   headers: {
     "Content-Type": "application/json",
   },
@@ -18,12 +14,6 @@ export const axiosInstance: AxiosInstance = axios.create({
 // Request Interceptor
 axiosInstance.interceptors.request.use(
   (config) => {
-    console.log(
-      "요청 전송:",
-      config.method?.toUpperCase(),
-      config.url,
-      config.data
-    );
     return config;
   },
   (error: AxiosError) => {
@@ -34,7 +24,6 @@ axiosInstance.interceptors.request.use(
 // Response Interceptor
 axiosInstance.interceptors.response.use(
   (response) => {
-    console.log("응답 수신:", response.status, response.config.url);
     return response;
   },
   async (error: AxiosError) => {

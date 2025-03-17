@@ -1,0 +1,91 @@
+.employeeListContainer {
+  margin: 32px 16px 16px 24px;
+  height: 100%;
+  width: 190px;
+}
+
+.employeeListHeader {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.employeeListHeaderTitle {
+  font-size: 16px;
+  color: #ffeba7;
+}
+
+.employeeListInput {
+  width: 100%;
+  padding: 2px 2px 2px 8px;
+  border-radius: 12px;
+}
+
+.employeeListButton {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+.employeeListButton button {
+  width: 100%;
+  height: 24px;
+  border-radius: 12px;
+  background-color: #ffeba7;
+  color: #1f2029;
+  font-weight: bold;
+}
+
+.employeeListTitle {
+  font-size: 24px;
+  color: #ffeba7;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.employeeList {
+  height: 540px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scrollbar-width: thin; /* Firefox용 */
+  scrollbar-color: #ffeba7 transparent; /* Firefox용 (thumb, track) */
+}
+
+.employeeListNameContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.employeeEditButton {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: center;
+}
+
+.employeeEditButton button {
+  width: 100%;
+  height: 24px;
+  padding: 4px;
+  border-radius: 12px;
+  background-color: #ffeba7;
+  color: #1f2029;
+  font-weight: bold;
+}
+
+.employeeListName {
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+}

@@ -1,7 +1,12 @@
 import styles from "./header.module.css";
 import Image from "next/image";
-
-export default function Header() {
+import { useState } from "react";
+export default function Header({
+  handleSearch,
+}: {
+  handleSearch: (keyword: string) => void;
+}) {
+  const [keyword, setKeyword] = useState("");
   return (
     <div className={styles.headerContainer}>
       <Image
@@ -18,8 +23,14 @@ export default function Header() {
           type="text"
           placeholder="Employee Search"
           className={styles.headerSearchInput}
+          onChange={(e) => setKeyword(e.target.value)}
         />
-        <button className={styles.headerSearchButton}>Search</button>
+        <button
+          className={styles.headerSearchButton}
+          onClick={() => handleSearch(keyword)}
+        >
+          Search
+        </button>
       </div>
     </div>
   );
