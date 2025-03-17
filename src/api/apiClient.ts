@@ -1,6 +1,10 @@
 import axios, { AxiosError, AxiosInstance } from "axios";
+import Modal from "@/components/modal/Modal";
 
 const baseURL = "/api";
+
+// 디버깅을 위한 로그 추가
+console.log("API 클라이언트 초기화, baseURL:", baseURL);
 
 export const axiosInstance: AxiosInstance = axios.create({
   baseURL,
@@ -14,6 +18,12 @@ export const axiosInstance: AxiosInstance = axios.create({
 // Request Interceptor
 axiosInstance.interceptors.request.use(
   (config) => {
+    console.log(
+      "요청 전송:",
+      config.method?.toUpperCase(),
+      config.url,
+      config.data
+    );
     return config;
   },
   (error: AxiosError) => {
@@ -24,9 +34,17 @@ axiosInstance.interceptors.request.use(
 // Response Interceptor
 axiosInstance.interceptors.response.use(
   (response) => {
+    console.log("응답 수신:", response.status, response.config.url);
     return response;
   },
   async (error: AxiosError) => {
+    console.error(
+      "응답 오류:",
+      error.message,
+      error.response?.status,
+      error.config?.url
+    );
+
     const originalRequest = error.config;
 
     // 토큰 만료 에러 (401) 처리
@@ -37,7 +55,6 @@ axiosInstance.interceptors.response.use(
           {},
           {
             withCredentials: true,
-            baseURL,
           }
         );
 
@@ -45,6 +62,10 @@ axiosInstance.interceptors.response.use(
           return axios(originalRequest);
         }
       } catch (refreshError) {
+        Modal({
+          message: "세션이 만료되었습니다. 다시 로그인해주세요.",
+          title: "세션 만료",
+        });
         window.location.href = "/login";
       }
     }

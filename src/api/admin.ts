@@ -25,4 +25,10 @@ const signup = async (email: string, password: string) => {
   });
 };
 
-export { login, logout, signup };
+// 회원 정보 조회
+const getUserInfo = async () => {
+  const response = await axiosInstance.get(`${PATH}/me`);
+  return response.data;
+};
+
+export { login, logout, signup, getUserInfo };

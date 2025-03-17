@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import refreshAccessToken from "@/api/token";
 
 // 로그인된 사용자가 접근하면 안 되는 페이지
 const authRoutes = ["/login", "/signup"];

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   description: "RATS: 실시간 출퇴근 관리 시스템",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
