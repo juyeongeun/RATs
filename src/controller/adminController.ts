@@ -63,4 +63,20 @@ router.post(
   })
 );
 
+router.get(
+  "/me",
+  passport.authenticate("access-token", { session: false }),
+  asyncHandle(async (req: Request, res: Response, next: NextFunction) => {
+    if (!req.user) {
+      throw new Error("인증되지 않은 사용자입니다.");
+    }
+
+    const user = req.user as CustomAdmin;
+    const userId = user.id;
+
+    const admin = await adminService.getAdminById(userId);
+    res.status(200).json(admin);
+  })
+);
+
 export default router;
